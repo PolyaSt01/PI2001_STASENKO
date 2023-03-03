@@ -12,9 +12,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
+
       home: const MyHomePage(title: 'Инкремент'),
     );
   }
@@ -36,11 +38,18 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
+  }
 
-    // void _decrementCounter() {
-    //   setState(() {
-    //     _counter--;
-    //   });
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
+
+  void _resetCounter() {
+    setState(() {
+      _counter = 0;
+    });
   }
 
   @override
@@ -49,7 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+
+      body:
+      Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -60,15 +71,37 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+
+             ButtonBar(
+              mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: _decrementCounter,
+                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.red), ),
+                    child: Text('-', style: TextStyle(fontSize: 30),),
+                  ),
+
+                  ElevatedButton(
+                    onPressed: _incrementCounter,
+                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),),
+                    child: Text('+', style: TextStyle(fontSize: 30),),
+                  ),
+                ],
+            ),
+
+            ButtonBar(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  TextButton(
+                    onPressed: _resetCounter,
+                    child: Text('Сбросить', style: TextStyle(fontSize: 16, color: Colors.grey),),
+                  ),
+                ]
+            )
+
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
