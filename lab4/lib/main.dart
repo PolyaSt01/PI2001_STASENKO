@@ -29,94 +29,64 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _like = 0;
+  late Color _buttonColor;
 
-  var _titleAndButton = Container(
-    padding: const EdgeInsets.all(28),
-    child: Row(
-      children:
-      [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: const Text(
-                  'Общежитие № 20',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-              ),
-              Text(
-                'Краснодар, ул. Калинина, 13',
-                style: TextStyle(color: Colors.grey,fontSize: 16,),
-              ),
-            ],
-          ),
-        ),
-        Icon(
-          Icons.favorite,
-          color: Colors.red,
-        ),
-        const Text('27',
-        style: TextStyle(fontSize: 17),),
-      ],
-    ),
-  );
+  void initState() {
+    _buttonColor = Colors.grey;
+    super.initState();
+  }
 
   var _buttonCall = Column(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Icon(
-        Icons.phone,
-        color: Colors.green,
-      ),
-
-      Container(
-        margin: const EdgeInsets.only(top: 8),
-        child: Text(
-          'Позвонить',
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400,color: Colors.green),
-        ),
+      ButtonBar(
+        children: [
+          TextButton(
+              onPressed: () {},
+              child: Column(
+                children: [
+                  Icon(Icons.call, color: Colors.green, size: 30,),
+                  Text('ПОЗВОНИТЬ', style: TextStyle(fontSize: 14, color: Colors.green),),
+                ],
+              ),
+          ),
+        ],
       )
     ],
   );
 
   var _buttonPath = Column(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Icon(
-        Icons.navigation,
-        color: Colors.green,
-      ),
-
-
-      Container(
-        margin: const EdgeInsets.only(top: 8),
-        child: Text(
-          'Маршрут',
-          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,color: Colors.green),
-        ),
+      ButtonBar(
+        children: [
+          TextButton(
+              onPressed: () {},
+              child: Column(
+                children:[
+                Icon(Icons.navigation, color: Colors.green, size: 30,),
+                Text('МАРШРУТ', style: TextStyle(fontSize: 14, color: Colors.green),),
+                ],
+              ),
+          ),
+        ],
       )
     ],
   );
 
   var _buttonShare = Column(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Icon(
-        Icons.share,
-        color: Colors.green,
-      ),
-
-      Container(
-        margin: const EdgeInsets.only(top: 8),
-        child: Text(
-          'Поделиться',
-          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400,color: Colors.green),
-        ),
+      ButtonBar(
+        children: [
+          TextButton(
+              onPressed: () {},
+              child: Column(
+                children: [
+                  Icon(Icons.share, color: Colors.green, size: 30,),
+                  Text('ПОДЕЛИТЬСЯ', style: TextStyle(fontSize: 14, color: Colors.green),),
+                ],
+              ),
+          ),
+        ],
       )
     ],
   );
@@ -129,18 +99,61 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
   );
 
-
-  var _descriptionOfTheHostel = Padding(
-    padding: EdgeInsets.all(28),
-    child: Text(
-      'Студенческий городок или так называемый кампус Кубанского ГАУ состоит из двадцати общежитий, в которых проживает более 8000 студентов, что составляет 96% от всех нуждающихся. Студенты первого курса обеспечены местами в общежитии полностью. В соответствии с Положением о студенческих общежитиях университета, при поселении между администрацией и студентами заключается договор найма жилого помещения. Воспитательная работа в общежитиях направлена на улучшение быта, соблюдение правил внутреннего распорядка, отсутствия асоциальных явлений в молодежной среде. Условия проживания в общежитиях университетского кампуса полностью отвечают санитарным нормам и требованиям: наличие оборудованных кухонь, душевых комнат, прачечных, читальных залов, комнат самоподготовки, помещений для заседаний студенческих советов и наглядной агитации. С целью улучшения условий быта студентов активно работает система студенческого самоуправления - студенческие советы организуют всю работу по самообслуживанию.',
-      style: TextStyle(fontSize: 16, color: Colors.black,),
-    ),
-  );
-
-
   @override
   Widget build(BuildContext context) {
+
+    var _titleAndButton = Container(
+      padding: const EdgeInsets.all(28),
+      child: Row(
+        children:
+        [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: const Text(
+                    'Общежитие № 20',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                ),
+                Text(
+                  'Краснодар, ул. Калинина, 13',
+                  style: TextStyle(color: Colors.grey,fontSize: 16,),
+                ),
+              ],
+            ),
+          ),
+          ButtonBar(
+            children: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    if (_buttonColor == Colors.grey) {
+                      _like++;
+                      _buttonColor = Colors.red;
+                    } else {
+                      _like--;
+                      _buttonColor = Colors.grey;
+                    }
+                  });
+                },
+                child: Row(
+                  children: [
+                    Icon(Icons.favorite, color: _buttonColor, size: 30,),
+                    Text(
+                      '$_like',
+                      style: TextStyle(fontSize: 19, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
 
     var _buttons = Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
