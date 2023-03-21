@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: ListView.builder(
-        itemBuilder: (context, index) => Text('строка $index', style: TextStyle(fontSize: 28),),
+        itemBuilder: (context, index) => Text('строка $index', style: TextStyle(fontSize: 32),),
       ),
 
     );

@@ -38,11 +38,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView(
         children: [
-          Text('0000', style: TextStyle(fontSize: 28),),
+          Text('0000', style: TextStyle(fontSize: 32),),
+          Divider(height: 10,),
+          Text('0001', style: TextStyle(fontSize: 32),),
           Divider(),
-          Text('0001', style: TextStyle(fontSize: 28),),
-          Divider(),
-          Text('0002', style: TextStyle(fontSize: 28),),
+          Text('0002', style: TextStyle(fontSize: 32),),
         ],
       ),
 

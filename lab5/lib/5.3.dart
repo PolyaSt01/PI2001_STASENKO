@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +11,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
@@ -29,6 +29,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List<int> Mathlist = List.generate(65, (int index) => index, growable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +37,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView(
-        children: [
-          Text('0000', style: TextStyle(fontSize: 24),),
-          Divider(),
-          Text('0001', style: TextStyle(fontSize: 24),),
-          Divider(),
-          Text('0002', style: TextStyle(fontSize: 24),),
-        ],
+      body: ListView.separated(
+        itemCount: Mathlist.length,
+        itemBuilder: (context, index) => ListTile(title: Text('2 ^ $index = ${pow(2, index)}', style: TextStyle(fontSize: 32),),),
+        separatorBuilder: (_, __) => Divider(),
       ),
-
     );
   }
 }
