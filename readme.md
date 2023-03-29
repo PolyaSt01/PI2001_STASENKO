@@ -7,3 +7,7 @@
 2. LAB-2
 3. LAB-3
 4. LAB-4
+5. LAB-5
+6. LAB-6
+7. LAB-7
+8. LAB-8
