@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
-
+import 'package:intl/intl.dart';
 
 Future<List<News>> fetchNews(http.Client client) async {
   final response = await client.get(Uri.parse('https://kubsau.ru/api/getNews.php?key=6df2f5d38d4e16b5a923a6d4873e2ee295d0ac90'));
@@ -120,7 +120,23 @@ class NewsList extends StatelessWidget {
     return ListView.builder(
       itemCount: newss.length,
       itemBuilder: (context, index) {
-        return Image.network(newss[index].PREVIEW_PICTURE_SRC);
+        return Container(
+          padding: EdgeInsets.all(10),
+          child: Card(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.network(newss[index].PREVIEW_PICTURE_SRC),
+                const SizedBox(height: 10,),
+                Text('${Bidi.stripHtmlIfNeeded(newss[index].ACTIVE_FROM)}', style: TextStyle(fontStyle: FontStyle.italic),),
+                Text('${Bidi.stripHtmlIfNeeded(newss[index].TITLE)}', style: TextStyle(fontWeight: FontWeight.bold),),
+                const SizedBox(height: 10,),
+                Text('${Bidi.stripHtmlIfNeeded(newss[index].PREVIEW_TEXT)}'),
+                const SizedBox(height: 10,),
+              ],
+            ),
+          ),
+        );
       },
     );
   }
