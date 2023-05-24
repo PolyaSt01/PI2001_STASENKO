@@ -1,6 +1,18 @@
+enum Coffee {
+  Americano,
+  Espresso,
+  Cappucino,
+}
+
+extension ParseToString on Coffee {
+  String toNewString() {
+    return toString().split('.').last;
+  }
+}
+
 abstract class ICoffee {
-  int coffee();
   int milk();
+  int coffeeBeans();
   int water();
   int cash();
 
@@ -9,35 +21,50 @@ abstract class ICoffee {
   static ICoffee getAmericano() => coffeeAmericano();
 }
 
-class coffeeEspresso implements ICoffee {
+class coffeeAmericano implements ICoffee {
+  final type = Coffee.Americano;
   @override
-  int coffee() => 40;
+  int cash() => 80;
+  @override
+  int coffeeBeans() => 50;
   @override
   int milk() => 0;
-  @override
-  int water() => 150;
-  @override
-  int cash() => 150;
-}
-
-class coffeeCappuccino implements ICoffee {
-  @override
-  int coffee() => 50;
-  @override
-  int milk() => 200;
   @override
   int water() => 100;
   @override
-  int cash() => 300;
+  String toString() {
+    return 'Американо';
+  }
 }
 
-class coffeeAmericano implements ICoffee {
+class coffeeEspresso implements ICoffee {
+  final type = Coffee.Espresso;
   @override
-  int coffee() => 60;
+  int cash() => 120;
   @override
-  int milk() => 0;
+  int coffeeBeans() => 30;
   @override
-  int water() => 150;
+  int milk() => 250;
   @override
-  int cash() => 200;
+  int water() => 50;
+  @override
+  String toString() {
+    return 'Эспрессо';
+  }
+}
+
+class coffeeCappuccino implements ICoffee {
+  final type = Coffee.Cappucino;
+  @override
+  int cash() => 150;
+  @override
+  int coffeeBeans() => 50;
+  @override
+  int milk() => 140;
+  @override
+  int water() => 30;
+  @override
+  String toString() {
+    return 'Каппучино';
+  }
 }
